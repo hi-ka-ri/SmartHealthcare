@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Healthcare - Trang chủ bệnh nhân</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand">Smart Healthcare</a>
+    <div class="ml-auto d-flex align-items-center">
+        <a th:href="@{/profile}" class="btn btn-info mr-3">Hồ sơ cá nhân</a>
+        <a th:href="@{/logout}" class="btn btn-light">Đăng xuất</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h3>Xin chào <span th:text="${profile.fullName}">bệnh nhân</span></h3>
+
+    <div class="row mt-4">
+        <!-- Đặt lịch khám -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Đặt lịch khám</h5>
+                <p class="text-muted">Đăng ký lịch hẹn với bác sĩ</p>
+                <a th:href="@{/patient/appointments}" class="btn btn-primary">Thực hiện</a>
+            </div>
+        </div>
+
+        <!-- Xem lịch sử bệnh án -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Lịch sử bệnh án</h5>
+                <p class="text-muted">Xem lại các lần khám trước</p>
+                <a th:href="@{/patient/records}" class="btn btn-success">Xem</a>
+            </div>
+        </div>
+
+        <!-- Hủy lịch khám -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Xem lịch khám</h5>
+                <p class="text-muted">Quản lý các lịch hẹn của bạn</p>
+                <a th:href="@{/patient/appointments}" class="btn btn-info">Xem</a>
+            </div>
+        </div>
+
+
+    </div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

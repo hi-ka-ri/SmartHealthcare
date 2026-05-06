@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hồ sơ cá nhân</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Hồ sơ cá nhân</h3>
+    <table class="table table-bordered mt-3">
+        <tr>
+            <th>Họ tên</th>
+            <td th:text="${profile.fullName}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${profile.email}"></td>
+        </tr>
+        <tr>
+            <th>Số điện thoại</th>
+            <td th:text="${profile.phone}"></td>
+        </tr>
+        <tr>
+            <th>Ngày sinh</th>
+            <td th:text="${profile.dob}"></td>
+        </tr>
+        <tr>
+            <th>Giới tính</th>
+            <td th:text="${profile.gender}"></td>
+        </tr>
+        <tr>
+            <th>Địa chỉ</th>
+            <td th:text="${profile.address}"></td>
+        </tr>
+    </table>
+
+    <!-- Hiển thị thêm theo role -->
+    <div th:switch="${role}">
+        <div th:case="'PATIENT'">
+            <h5>Thông tin bệnh nhân</h5>
+            <p>Mã bệnh nhân: <span th:text="${userId}"></span></p>
+            <a href="/patient/appointments" class="btn btn-primary">Xem lịch khám</a>
+        </div>
+        <div th:case="'DOCTOR'">
+            <h5>Thông tin bác sĩ</h5>
+            <p>Mã bác sĩ: <span th:text="${userId}"></span></p>
+            <a href="/doctor/dashboard" class="btn btn-success">Xem dashboard</a>
+        </div>
+        <div th:case="'ADMIN'">
+            <h5>Thông tin quản trị</h5>
+            <p>ID admin: <span th:text="${userId}"></span></p>
+            <a href="/admin/dashboard" class="btn btn-warning">Quản lý hệ thống</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Healthcare - Trang chủ bác sĩ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">Smart Healthcare - Doctor</a>
+    <div class="ml-auto">
+        <a th:href="@{/profile}" class="btn btn-info mr-3">Hồ sơ cá nhân</a>
+        <a th:href="@{/logout}" class="btn btn-light">Đăng xuất</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h3>Xin chào <span th:text="${profile.fullName}">bác sĩ</span></h3>
+
+    <div class="row mt-4">
+
+        <!-- Duyệt đơn thuốc -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Duyệt đơn thuốc</h5>
+                <p class="text-muted">Xem và duyệt đơn thuốc bệnh nhân</p>
+                <a th:href="@{/doctor/prescriptions/approve}" class="btn btn-success">Duyệt</a>
+            </div>
+        </div>
+
+        <!-- Kê đơn thuốc -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Kê đơn thuốc</h5>
+                <p class="text-muted">Tạo đơn thuốc mới cho bệnh nhân</p>
+                <a th:href="@{/doctor/prescriptions}" class="btn btn-warning">Kê đơn</a>
+            </div>
+        </div>
+
+        <!-- Nhập kết quả chẩn đoán -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Nhập kết quả chẩn đoán</h5>
+                <p class="text-muted">Ghi nhận kết quả khám bệnh</p>
+                <a th:href="@{/doctor/diagnosis}" class="btn btn-primary">Nhập</a>
+            </div>
+        </div>
+
+        <!-- Danh sách bệnh nhân chờ khám -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3 shadow text-center">
+                <h5>Bệnh nhân chờ khám</h5>
+                <p class="text-muted">Xem danh sách bệnh nhân hôm nay</p>
+                <a th:href="@{/doctor/patients}" class="btn btn-danger">Xem</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
