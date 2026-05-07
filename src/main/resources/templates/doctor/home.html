@@ -1,69 +1,276 @@
 <!doctype html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Smart Healthcare - Trang chủ bác sĩ</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Healthcare - Trang chủ bác sĩ</title>
+    <link rel="stylesheet" th:href="@{/css/homeDoctor.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          crossorigin="anonymous">
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand">Smart Healthcare - Doctor</a>
-    <div class="ml-auto">
-        <a th:href="@{/profile}" class="btn btn-info mr-3">Hồ sơ cá nhân</a>
-        <a th:href="@{/logout}" class="btn btn-light">Đăng xuất</a>
+
+<!-- ─── Sidebar ─── -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <i class="ti ti-stethoscope"></i>
+        <span>Smart Healthcare <small>Doctor Portal</small></span>
     </div>
-</nav>
 
-<div class="container mt-4">
-    <h3>Xin chào <span th:text="${profile.fullName}">bác sĩ</span></h3>
+    <nav class="sidebar-nav">
+        <div class="nav-section">Tổng quan</div>
+        <a href="#" class="nav-item active">
+            <i class="ti ti-layout-dashboard"></i> Dashboard
+        </a>
 
-    <div class="row mt-4">
+        <div class="nav-section">Khám bệnh</div>
+        <a href="/doctor/patients" class="nav-item">
+            <i class="ti ti-users"></i> Bệnh nhân chờ khám
+        </a>
+        <a href="/doctor/diagnosis" class="nav-item">
+            <i class="ti ti-report-medical"></i> Nhập chẩn đoán
+        </a>
 
-        <!-- Duyệt đơn thuốc -->
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Duyệt đơn thuốc</h5>
-                <p class="text-muted">Xem và duyệt đơn thuốc bệnh nhân</p>
-                <a th:href="@{/doctor/prescriptions/approve}" class="btn btn-success">Duyệt</a>
+        <div class="nav-section">Đơn thuốc</div>
+        <a href="/doctor/prescriptions" class="nav-item">
+            <i class="ti ti-pill"></i> Kê đơn thuốc
+        </a>
+        <a href="/doctor/prescriptions/approve" class="nav-item">
+            <i class="ti ti-clipboard-check"></i> Duyệt đơn thuốc
+        </a>
+
+        <div class="nav-section">Lịch làm việc</div>
+        <a href="/doctor/schedule" class="nav-item">
+            <i class="ti ti-calendar-week"></i> Lịch trực
+        </a>
+        <a href="/doctor/appointments" class="nav-item">
+            <i class="ti ti-calendar-event"></i> Lịch hẹn
+        </a>
+    </nav>
+</aside>
+
+<!-- ─── Main ─── -->
+<div class="main-wrap">
+
+    <header class="topbar">
+        <div class="topbar-left">
+            <h1>Dashboard</h1>
+            <span class="sep">/</span>
+            <span class="topbar-sub">Xin chào, <strong th:text="${profile.fullName}" style="font-weight:500;">BS. Nguyễn Văn Bình</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="/profile" class="topbar-btn btn-outline">
+                <i class="ti ti-user"></i> Hồ sơ
+            </a>
+            <a href="/logout" class="topbar-btn btn-navy">
+                <i class="ti ti-logout"></i> Đăng xuất
+            </a>
+            <div class="avatar-sm">NB</div>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <!-- Stats strip -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon icon-amber"><i class="ti ti-users"></i></div>
+                <div>
+                    <div class="stat-val">12</div>
+                    <div class="stat-label">Bệnh nhân chờ</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="ti ti-calendar-check"></i></div>
+                <div>
+                    <div class="stat-val">8</div>
+                    <div class="stat-label">Lịch hẹn hôm nay</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-navy"><i class="ti ti-clipboard-text"></i></div>
+                <div>
+                    <div class="stat-val">5</div>
+                    <div class="stat-label">Đơn chờ duyệt</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="ti ti-check"></i></div>
+                <div>
+                    <div class="stat-val">3</div>
+                    <div class="stat-label">Đã khám hôm nay</div>
+                </div>
             </div>
         </div>
 
-        <!-- Kê đơn thuốc -->
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Kê đơn thuốc</h5>
-                <p class="text-muted">Tạo đơn thuốc mới cho bệnh nhân</p>
-                <a th:href="@{/doctor/prescriptions}" class="btn btn-warning">Kê đơn</a>
-            </div>
+        <!-- Feature cards -->
+        <p class="section-title">Chức năng</p>
+        <div class="cards-grid">
+
+            <a href="/doctor/patients" class="feat-card">
+                <div class="card-icon icon-amber"><i class="ti ti-users"></i></div>
+                <h3>Bệnh nhân chờ khám</h3>
+                <p>Xem danh sách bệnh nhân đang chờ trong ngày</p>
+                <span class="card-link lnk-amber">Xem ngay <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/doctor/diagnosis" class="feat-card">
+                <div class="card-icon icon-blue"><i class="ti ti-report-medical"></i></div>
+                <h3>Nhập kết quả chẩn đoán</h3>
+                <p>Ghi nhận kết quả và kết luận sau khám bệnh</p>
+                <span class="card-link lnk-blue">Nhập <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/doctor/prescriptions" class="feat-card">
+                <div class="card-icon icon-green"><i class="ti ti-pill"></i></div>
+                <h3>Kê đơn thuốc</h3>
+                <p>Tạo đơn thuốc mới cho bệnh nhân</p>
+                <span class="card-link lnk-green">Kê đơn <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/doctor/prescriptions/approve" class="feat-card">
+                <div class="card-icon icon-navy"><i class="ti ti-clipboard-check"></i></div>
+                <h3>Duyệt đơn thuốc</h3>
+                <p>Xem xét và phê duyệt đơn thuốc bệnh nhân</p>
+                <span class="card-link lnk-navy">Duyệt <i class="ti ti-arrow-right"></i></span>
+            </a>
+
         </div>
 
-        <!-- Nhập kết quả chẩn đoán -->
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Nhập kết quả chẩn đoán</h5>
-                <p class="text-muted">Ghi nhận kết quả khám bệnh</p>
-                <a th:href="@{/doctor/diagnosis}" class="btn btn-primary">Nhập</a>
+        <!-- Bottom panels -->
+        <div class="bottom-grid">
+
+            <!-- Patient queue today -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h4>Bệnh nhân hôm nay</h4>
+                    <a href="/doctor/patients">Xem tất cả</a>
+                </div>
+
+                <div class="patient-row">
+                    <div class="queue-num">1</div>
+                    <div class="patient-info">
+                        <div class="p-name">Nguyễn Thị Mai</div>
+                        <div class="p-meta">
+                            <span><i class="ti ti-clock" style="font-size:11px;"></i> 08:00</span>
+                            <span>Nội khoa</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-done">Đã khám</span>
+                </div>
+
+                <div class="patient-row">
+                    <div class="queue-num">2</div>
+                    <div class="patient-info">
+                        <div class="p-name">Trần Văn Hùng</div>
+                        <div class="p-meta">
+                            <span><i class="ti ti-clock" style="font-size:11px;"></i> 08:30</span>
+                            <span>Tim mạch</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-in-prog">Đang khám</span>
+                    <a href="/doctor/patients/2" class="btn-examine">Mở <i class="ti ti-external-link" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="patient-row">
+                    <div class="queue-num">3</div>
+                    <div class="patient-info">
+                        <div class="p-name">Lê Thị Hoa</div>
+                        <div class="p-meta">
+                            <span><i class="ti ti-clock" style="font-size:11px;"></i> 09:00</span>
+                            <span>Nội khoa</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ khám</span>
+                    <a href="/doctor/patients/3" class="btn-examine">Khám <i class="ti ti-arrow-right" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="patient-row">
+                    <div class="queue-num">4</div>
+                    <div class="patient-info">
+                        <div class="p-name">Phạm Minh Tuấn</div>
+                        <div class="p-meta">
+                            <span><i class="ti ti-clock" style="font-size:11px;"></i> 09:30</span>
+                            <span>Nhi khoa</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ khám</span>
+                    <a href="/doctor/patients/4" class="btn-examine">Khám <i class="ti ti-arrow-right" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="patient-row">
+                    <div class="queue-num">5</div>
+                    <div class="patient-info">
+                        <div class="p-name">Hoàng Thị Lan</div>
+                        <div class="p-meta">
+                            <span><i class="ti ti-clock" style="font-size:11px;"></i> 10:00</span>
+                            <span>Da liễu</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ khám</span>
+                    <a href="/doctor/patients/5" class="btn-examine">Khám <i class="ti ti-arrow-right" style="font-size:13px;"></i></a>
+                </div>
+
             </div>
+
+            <!-- Pending prescriptions -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h4>Đơn thuốc chờ duyệt</h4>
+                    <a href="/doctor/prescriptions/approve">Xem tất cả</a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info" style="flex:1;">
+                        <div class="pres-name">Nguyễn Văn An</div>
+                        <div class="pres-time"><i class="ti ti-clock" style="font-size:11px;"></i> 07:45 hôm nay</div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ duyệt</span>
+                    <a href="/doctor/prescriptions/approve/1" class="btn-examine">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info" style="flex:1;">
+                        <div class="pres-name">Lê Minh Quân</div>
+                        <div class="pres-time"><i class="ti ti-clock" style="font-size:11px;"></i> 08:10 hôm nay</div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ duyệt</span>
+                    <a href="/doctor/prescriptions/approve/2" class="btn-examine">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info" style="flex:1;">
+                        <div class="pres-name">Trần Thị Bích</div>
+                        <div class="pres-time"><i class="ti ti-clock" style="font-size:11px;"></i> 08:50 hôm nay</div>
+                    </div>
+                    <span class="badge badge-waiting">Chờ duyệt</span>
+                    <a href="/doctor/prescriptions/approve/3" class="btn-examine">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info" style="flex:1;">
+                        <div class="pres-name">Vũ Hoàng Nam</div>
+                        <div class="pres-time"><i class="ti ti-clock" style="font-size:11px;"></i> Hôm qua</div>
+                    </div>
+                    <span class="badge badge-done">Đã duyệt</span>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info" style="flex:1;">
+                        <div class="pres-name">Đặng Thị Kim Oanh</div>
+                        <div class="pres-time"><i class="ti ti-clock" style="font-size:11px;"></i> Hôm qua</div>
+                    </div>
+                    <span class="badge badge-done">Đã duyệt</span>
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- Danh sách bệnh nhân chờ khám -->
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Bệnh nhân chờ khám</h5>
-                <p class="text-muted">Xem danh sách bệnh nhân hôm nay</p>
-                <a th:href="@{/doctor/patients}" class="btn btn-danger">Xem</a>
-            </div>
-        </div>
-    </div>
+    </main>
 </div>
 
-<!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

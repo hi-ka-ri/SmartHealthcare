@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Xác nhận xóa thuốc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #eef7f4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .del-card {
+            background: #fff;
+            border: 0.5px solid #cce8de;
+            border-radius: 14px;
+            padding: 40px 36px;
+            width: 420px;
+            text-align: center;
+        }
+        .del-icon {
+            width: 56px; height: 56px;
+            background: #FCEBEB;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 26px; color: #E24B4A;
+        }
+        .del-title {
+            font-size: 18px; font-weight: 500; color: #0a4a3a;
+            margin-bottom: 10px;
+        }
+        .del-sub {
+            font-size: 13px; color: #888; line-height: 1.7;
+            margin-bottom: 28px;
+        }
+        .del-sub strong { color: #1a1a2e; font-weight: 500; }
+        .del-actions { display: flex; gap: 10px; }
+        .btn-cancel-del {
+            flex: 1; height: 42px;
+            border: 0.5px solid #cce8de; border-radius: 8px;
+            font-size: 13px; font-family: 'DM Sans', sans-serif;
+            background: transparent; color: #666; cursor: pointer;
+            text-decoration: none; display: inline-flex;
+            align-items: center; justify-content: center; gap: 6px;
+        }
+        .btn-cancel-del:hover { background: #f6fbf9; }
+        .btn-confirm-del {
+            flex: 1; height: 42px;
+            background: #E24B4A; color: #fff;
+            border: none; border-radius: 8px;
+            font-size: 13px; font-weight: 500;
+            font-family: 'DM Sans', sans-serif; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .btn-confirm-del:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+<div class="del-card">
+    <div class="del-icon"><i class="ti ti-trash"></i></div>
+    <h2 class="del-title">Xác nhận xóa thuốc</h2>
+    <p class="del-sub">
+        Bạn có chắc chắn muốn xóa thuốc<br>
+        <strong th:text="${medicine.name}"></strong> không?<br>
+        Hành động này không thể hoàn tác.
+    </p>
+    <form th:action="@{/admin/medicines/delete/{id}(id=${medicine.medicineId})}" method="post">
+        <div class="del-actions">
+            <a th:href="@{/admin/medicines}" class="btn-cancel-del">
+                <i class="ti ti-arrow-left" style="font-size:14px"></i> Hủy bỏ
+            </a>
+            <button type="submit" class="btn-confirm-del">
+                <i class="ti ti-trash" style="font-size:14px"></i> Xóa thuốc
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

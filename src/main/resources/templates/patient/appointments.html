@@ -1,53 +1,88 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>Đặt lịch khám</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body { background: #f5f6fa; }
+
+        .box {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-<body>
-<div class="container mt-4">
-    <h3>Danh sách lịch khám</h3>
-    <table class="table table-bordered mt-3">
-        <thead>
-        <tr>
-            <th>Ngày</th>
-            <th>Giờ</th>
-            <th>Bác sĩ</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="appt : ${appointments}">
-            <td th:text="${appt.date}"></td>
-            <td th:text="${appt.time}"></td>
-            <td th:text="${appt.doctorName}"></td>
-            <td th:text="${appt.status}"></td>
-            <td>
-                <a th:href="@{'/patient/appointments/cancel/' + ${appt.id}}"
-                   class="btn btn-danger btn-sm">Hủy</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+<body>
+
+<div class="box">
+
+    <div class="title">📅 Đặt lịch khám</div>
+
+    <form th:action="@{/patient/appointments/save}"
+          th:object="${appointmentDTO}"
+          method="post">
+
+        <!-- SPECIALTY -->
+        <div class="mb-3">
+            <label>Chuyên khoa</label>
+            <select class="form-select"
+                    th:field="*{specialtyId}"
+                    id="specialty">
+                <option value="">-- Chọn chuyên khoa --</option>
+                <option th:each="s : ${specialties}"
+                        th:value="${s.specialtyId}"
+                        th:text="${s.name}">
+                </option>
+            </select>
+        </div>
+
+        <!-- DOCTOR (dynamic) -->
+        <div class="mb-3">
+            <label>Bác sĩ</label>
+            <select class="form-select"
+                    th:field="*{doctorId}"
+                    id="doctor">
+                <option value="">-- Chọn bác sĩ --</option>
+            </select>
+        </div>
+
+        <!-- DATE -->
+        <div class="mb-3">
+            <label>Ngày khám</label>
+            <input type="date"
+                   class="form-control"
+                   th:field="*{appointmentDate}"
+                   id="date">
+        </div>
+
+        <!-- TIME (DB driven) -->
+        <div class="mb-3">
+            <label>Giờ khám</label>
+            <select class="form-select"
+                    th:field="*{appointmentTime}"
+                    id="time">
+                <option value="">-- Chọn giờ --</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100">
+            Đặt lịch
+        </button>
+
+    </form>
+</div>

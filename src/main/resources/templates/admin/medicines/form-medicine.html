@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Medicine Form</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/formMedicine.css}">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <div class="form-card">
+
+        <!-- HEADER -->
+        <div class="form-header">
+
+            <h1 th:if="${medicineDTO.medicineId == null}">
+                Add Medicine
+            </h1>
+
+            <h1 th:if="${medicineDTO.medicineId != null}">
+                Update Medicine
+            </h1>
+
+            <p>Medicine information</p>
+
+        </div>
+
+        <!-- FORM -->
+        <form th:action="@{/admin/medicines/save}"
+              th:object="${medicineDTO}"
+              method="post">
+
+            <!-- ID -->
+            <input type="hidden"
+                   th:field="*{medicineId}">
+
+            <!-- NAME -->
+            <div class="field">
+
+                <label>Name</label>
+
+                <input type="text"
+                       th:field="*{name}"
+                       placeholder="Enter medicine name">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}">
+                </small>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="field">
+
+                <label>Description</label>
+
+                <textarea th:field="*{description}"
+                          rows="4"
+                          placeholder="Enter description">
+                </textarea>
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('description')}"
+                       th:errors="*{description}">
+                </small>
+
+            </div>
+
+            <!-- STOCK -->
+            <div class="field">
+
+                <label>Stock Quantity</label>
+
+                <input type="number"
+                       th:field="*{stockQuantity}"
+                       min="0">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('stockQuantity')}"
+                       th:errors="*{stockQuantity}">
+                </small>
+
+            </div>
+
+            <!-- UNIT -->
+            <div class="field">
+
+                <label>Unit</label>
+
+                <input type="text"
+                       th:field="*{unit}"
+                       placeholder="Tablet, Box...">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('unit')}"
+                       th:errors="*{unit}">
+                </small>
+
+            </div>
+
+            <!-- PRICE -->
+            <div class="field">
+
+                <label>Price</label>
+
+                <input type="number"
+                       th:field="*{price}"
+                       min="0"
+                       step="0.01">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('price')}"
+                       th:errors="*{price}">
+                </small>
+
+            </div>
+
+            <!-- MANUFACTURER -->
+            <div class="field">
+
+                <label>Manufacturer</label>
+
+                <input type="text"
+                       th:field="*{manufacturer}"
+                       placeholder="Enter manufacturer">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('manufacturer')}"
+                       th:errors="*{manufacturer}">
+                </small>
+
+            </div>
+            <!-- EXPIRY DATE -->
+            <div class="field">
+
+                <label>Expiry Date</label>
+
+                <input type="date"
+                       th:field="*{expiryDate}">
+
+                <small class="error"
+                       th:if="${#fields.hasErrors('expiryDate')}"
+                       th:errors="*{expiryDate}">
+                </small>
+
+            </div>
+
+            <!-- ACTION -->
+            <div class="form-actions">
+
+                <a th:href="@{/admin/medicines}"
+                   class="btn-cancel">
+
+                    Back
+
+                </a>
+
+                <button type="submit"
+                        class="btn-save">
+
+                    Save Medicine
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

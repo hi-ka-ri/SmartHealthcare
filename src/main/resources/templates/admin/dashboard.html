@@ -1,60 +1,273 @@
 <!doctype html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Smart Healthcare - Admin Dashboard</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Healthcare - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/homeAdmin.css}">
+    <style>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          crossorigin="anonymous">
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-    <a class="navbar-brand">Smart Healthcare - Admin</a>
-    <div class="ml-auto">
-        <a th:href="@{/profile}" class="btn btn-info mr-3">Hồ sơ cá nhân</a>
-        <a th:href="@{/logout}" class="btn btn-light">Đăng xuất</a>
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <i class="ti ti-shield-heart"></i>
+        <span>Smart Healthcare <small>Admin Panel</small></span>
     </div>
-</nav>
 
-<div class="container mt-4">
-    <h3>Xin chào <span th:text="${profile.fullName}">Quản trị viên</span></h3>
+    <nav class="sidebar-nav">
+        <div class="nav-section">Tổng quan</div>
+        <a href="#" class="nav-item active">
+            <i class="ti ti-layout-dashboard"></i> Dashboard
+        </a>
 
-    <div class="row mt-4">
+        <div class="nav-section">Quản lý</div>
+        <a href="/admin/tests" class="nav-item">
+            <i class="ti ti-test-pipe"></i> Danh mục xét nghiệm
+        </a>
+        <a href="/admin/specialties" class="nav-item">
+            <i class="ti ti-stethoscope"></i> Danh mục chuyên khoa
+        </a>
+        <a href="/admin/medicines" class="nav-item">
+            <i class="ti ti-pill"></i> Danh mục thuốc
+        </a>
+        <a href="/admin/prescriptions" class="nav-item">
+            <i class="ti ti-clipboard-text"></i> Duyệt đơn thuốc
+        </a>
+        <a href="/admin/doctors" class="nav-item">
+            <i class="ti ti-user-heart"></i> Bác sĩ
+        </a>
+        <a href="/admin/patients" class="nav-item">
+            <i class="ti ti-users"></i> Bệnh nhân
+        </a>
+    </nav>
+</aside>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Danh mục xét nghiệm</h5>
-                <a th:href="@{/admin/tests}" class="btn btn-primary">Quản lý</a>
+<!-- ── Main ── -->
+<div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <h1>Dashboard</h1>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Trang chủ quản trị</span>
+        </div>
+        <div class="topbar-right">
+            <a href="/profile" class="topbar-btn btn-outline">
+                <i class="ti ti-user"></i> Hồ sơ
+            </a>
+            <a href="/logout" class="topbar-btn btn-danger-soft">
+                <i class="ti ti-logout"></i> Đăng xuất
+            </a>
+            <div class="avatar-sm">QT</div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+        <!-- Greeting -->
+        <div class="greeting-bar">
+            <div class="greeting-left">
+                <div class="avatar-md">QT</div>
+                <div class="greeting-text">
+                    <div class="label">Xin chào,</div>
+                    <div class="name" th:text="${profile.fullName}">Quản Trị Viên</div>
+                    <div class="admin-badge">
+                        <i class="ti ti-shield-check" style="font-size:11px;"></i> Administrator
+                    </div>
+                </div>
+            </div>
+            <div class="greeting-right">
+                <span>Thứ Năm</span>
+                <strong>07 tháng 5, 2026</strong>
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Danh mục chuyên khoa</h5>
-                <a th:href="@{/admin/specialties}" class="btn btn-success">Quản lý</a>
+        <!-- Stats -->
+        <p class="section-title">Tổng quan hệ thống</p>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="ti ti-users"></i></div>
+                <div class="stat-body">
+                    <div class="stat-val">248</div>
+                    <div class="stat-label">Bệnh nhân</div>
+                    <div class="stat-sub">+12 tuần này</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="ti ti-user-heart"></i></div>
+                <div class="stat-body">
+                    <div class="stat-val">34</div>
+                    <div class="stat-label">Bác sĩ</div>
+                    <div class="stat-sub">8 chuyên khoa</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-amber"><i class="ti ti-clipboard-text"></i></div>
+                <div class="stat-body">
+                    <div class="stat-val">17</div>
+                    <div class="stat-label">Đơn chờ duyệt</div>
+                    <div class="stat-sub">cần xử lý</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-red"><i class="ti ti-calendar-check"></i></div>
+                <div class="stat-body">
+                    <div class="stat-val">86</div>
+                    <div class="stat-label">Lịch hẹn hôm nay</div>
+                    <div class="stat-sub">14 còn trống</div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Duyệt đơn thuốc</h5>
-                <a th:href="@{/admin/prescriptions}" class="btn btn-warning">Duyệt</a>
-            </div>
+        <!-- Management -->
+        <p class="section-title">Quản lý danh mục</p>
+        <div class="cards-grid">
+
+            <a href="/admin/tests" class="mgmt-card">
+                <div class="card-icon icon-blue"><i class="ti ti-test-pipe"></i></div>
+                <h3>Danh mục xét nghiệm</h3>
+                <p>Thêm, sửa, xóa các loại xét nghiệm trong hệ thống</p>
+                <span class="card-link link-blue">Quản lý <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/admin/specialties" class="mgmt-card">
+                <div class="card-icon icon-green"><i class="ti ti-stethoscope"></i></div>
+                <h3>Danh mục chuyên khoa</h3>
+                <p>Quản lý các chuyên khoa y tế và phân công bác sĩ</p>
+                <span class="card-link link-green">Quản lý <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/admin/prescriptions" class="mgmt-card">
+                <div class="card-icon icon-amber"><i class="ti ti-clipboard-check"></i></div>
+                <h3>Duyệt đơn thuốc</h3>
+                <p>Xem xét và phê duyệt đơn thuốc từ bác sĩ</p>
+                <span class="card-link link-amber">Duyệt ngay <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/admin/medicines" class="mgmt-card">
+                <div class="card-icon icon-red"><i class="ti ti-pill"></i></div>
+                <h3>Danh mục thuốc</h3>
+                <p>Quản lý kho thuốc, liều dùng và nhà cung cấp</p>
+                <span class="card-link link-red">Quản lý <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/admin/doctors" class="mgmt-card">
+                <div class="card-icon icon-purple"><i class="ti ti-user-heart"></i></div>
+                <h3>Quản lý bác sĩ</h3>
+                <p>Thêm, phân công và theo dõi lịch làm việc bác sĩ</p>
+                <span class="card-link link-purple">Quản lý <i class="ti ti-arrow-right"></i></span>
+            </a>
+
+            <a href="/admin/patients" class="mgmt-card">
+                <div class="card-icon icon-cyan"><i class="ti ti-users"></i></div>
+                <h3>Quản lý bệnh nhân</h3>
+                <p>Xem danh sách, hồ sơ và lịch sử khám của bệnh nhân</p>
+                <span class="card-link link-cyan">Quản lý <i class="ti ti-arrow-right"></i></span>
+            </a>
+
         </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card p-3 shadow text-center">
-                <h5>Danh mục thuốc</h5>
-                <a th:href="@{/admin/medicines}" class="btn btn-danger">Quản lý</a>
+        <!-- Bottom panels -->
+        <div class="bottom-grid">
+
+            <!-- Activity log -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h4>Hoạt động gần đây</h4>
+                    <a href="#">Xem tất cả</a>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-dot dot-green"></div>
+                    <div class="activity-info">
+                        <div class="act-text">Đơn thuốc #1042 được phê duyệt</div>
+                        <div class="act-time">5 phút trước</div>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-dot dot-blue"></div>
+                    <div class="activity-info">
+                        <div class="act-text">Bệnh nhân mới đăng ký — Nguyễn Thị Mai</div>
+                        <div class="act-time">22 phút trước</div>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-dot dot-amber"></div>
+                    <div class="activity-info">
+                        <div class="act-text">Chuyên khoa Tim mạch cập nhật lịch trực</div>
+                        <div class="act-time">1 giờ trước</div>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-dot dot-red"></div>
+                    <div class="activity-info">
+                        <div class="act-text">Thuốc Amoxicillin sắp hết — còn 12 hộp</div>
+                        <div class="act-time">3 giờ trước</div>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-dot dot-blue"></div>
+                    <div class="activity-info">
+                        <div class="act-text">BS. Trần Minh Khoa cập nhật hồ sơ</div>
+                        <div class="act-time">Hôm qua</div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Pending prescriptions -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h4>Đơn thuốc chờ duyệt</h4>
+                    <a href="/admin/prescriptions">Xem tất cả</a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info">
+                        <div class="pres-name">Nguyễn Văn An</div>
+                        <div class="pres-doc">BS. Trần Minh Khoa · Nội khoa</div>
+                    </div>
+                    <span class="badge badge-pending">Chờ duyệt</span>
+                    <a href="/admin/prescriptions/1" class="btn-approve">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info">
+                        <div class="pres-name">Lê Thị Hoa</div>
+                        <div class="pres-doc">BS. Nguyễn Phúc Bình · Tim mạch</div>
+                    </div>
+                    <span class="badge badge-pending">Chờ duyệt</span>
+                    <a href="/admin/prescriptions/2" class="btn-approve">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info">
+                        <div class="pres-name">Phạm Minh Tuấn</div>
+                        <div class="pres-doc">BS. Lê Thị Hương · Nhi khoa</div>
+                    </div>
+                    <span class="badge badge-pending">Chờ duyệt</span>
+                    <a href="/admin/prescriptions/3" class="btn-approve">Duyệt <i class="ti ti-check" style="font-size:13px;"></i></a>
+                </div>
+
+                <div class="pres-row">
+                    <div class="pres-info">
+                        <div class="pres-name">Trần Thị Lan</div>
+                        <div class="pres-doc">BS. Hoàng Văn Nam · Da liễu</div>
+                    </div>
+                    <span class="badge badge-approved">Đã duyệt</span>
+                </div>
+
+            </div>
+
         </div>
-    </div>
+
+    </main>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

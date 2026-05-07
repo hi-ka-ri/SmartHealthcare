@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #eef7f4;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 24px;
+}
+
+/* ── Header ── */
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #0a4a3a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-header h1 .ti {
+    font-size: 22px;
+    color: #1d9e75;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* ── Button add ── */
+.btn-add {
+    height: 40px;
+    padding: 0 18px;
+    background: #0f6e56;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-add:hover { background: #085041; }
+
+/* ── Alerts ── */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert.success {
+    background: #E1F5EE;
+    color: #085041;
+    border: 0.5px solid #9fe1cb;
+}
+
+.alert.error {
+    background: #FCEBEB;
+    color: #791F1F;
+    border: 0.5px solid #F09595;
+}
+
+/* ── Table wrapper ── */
+.table-wrapper {
+    background: #fff;
+    border: 0.5px solid #cce8de;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead { background: #f6fbf9; }
+
+th {
+    padding: 11px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #0f6e56;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+    border-bottom: 0.5px solid #d9ede7;
+}
+
+td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #1a1a2e;
+    border-bottom: 0.5px solid #eef7f4;
+    vertical-align: middle;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f6fbf9; }
+
+/* ── Stock badges ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.badge-ok  { background: #E1F5EE; color: #085041; }
+.badge-low { background: #FAEEDA; color: #633806; }
+.badge-out { background: #FCEBEB; color: #791F1F; }
+
+/* ── Price ── */
+.price-cell {
+    font-weight: 500;
+    color: #0f6e56;
+}
+
+/* ── Empty row ── */
+.empty {
+    text-align: center;
+    padding: 48px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ── Action buttons ── */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-edit,
+.btn-delete {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+}
+
+.btn-edit {
+    border: 0.5px solid #cce8de;
+    color: #1d9e75;
+}
+
+.btn-edit:hover {
+    background: #E1F5EE;
+    border-color: #1d9e75;
+}
+
+.btn-delete {
+    border: 0.5px solid #f5c6c6;
+    color: #E24B4A;
+}
+
+.btn-delete:hover {
+    background: #FCEBEB;
+    border-color: #E24B4A;
+}
+
+/*search*/
+/* SEARCH BOX */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    max-width: 500px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+}
+
+.search-box button {
+    padding: 10px 14px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+.search-box button:hover {
+    background: #3730a3;
+}

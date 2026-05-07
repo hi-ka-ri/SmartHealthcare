@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Medicine Management</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/listMedicine.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                <i class="ti ti-pill"></i>
+
+                Medicine Management
+            </h1>
+
+            <p>Manage medicines in system</p>
+
+        </div>
+
+        <!-- CREATE -->
+        <a th:href="@{/admin/medicines/create}"
+           class="btn-add">
+
+            <i class="ti ti-plus"></i>
+            Add Medicine
+
+        </a>
+
+    </div>
+    <!-- SEARCH BOX -->
+    <form class="search-box"
+          th:action="@{/admin/medicines}"
+          method="get">
+
+        <input type="text"
+               name="keyword"
+               placeholder="Search medicine name..."
+               th:value="${keyword}">
+
+        <button type="submit">
+            <i class="ti ti-search"></i>
+            Search
+        </button>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="alert success"
+         th:if="${successMessage}">
+
+        <span th:text="${successMessage}"></span>
+
+    </div>
+
+    <!-- ERROR -->
+    <div class="alert error"
+         th:if="${errorMessage}">
+
+        <span th:text="${errorMessage}"></span>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Stock</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>Manufacturer</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <!-- EMPTY -->
+            <tr th:if="${#lists.isEmpty(medicines)}">
+
+                <td colspan="9"
+                    class="empty">
+
+                    No medicines found
+
+                </td>
+
+            </tr>
+
+            <!-- DATA -->
+            <tr th:each="med : ${medicines}">
+
+                <td th:text="${med.medicineId}"></td>
+
+                <td th:text="${med.name}"></td>
+
+                <td th:text="${med.description}"></td>
+
+                <td th:text="${med.stockQuantity}"></td>
+
+                <td th:text="${med.unit}"></td>
+
+                <td th:text="${med.price}"></td>
+
+                <td th:text="${med.manufacturer}"></td>
+
+                <td th:text="${#temporals.format(med.expiryDate, 'dd/MM/yyyy')}"></td>
+
+                <td class="actions">
+
+                    <!-- EDIT -->
+                    <a class="btn-edit"
+                       th:href="@{/admin/medicines/edit/{id}(id=${med.medicineId})}">
+
+                        <i class="ti ti-edit"></i>
+
+                    </a>
+
+                    <!-- DELETE -->
+                    <form th:action="@{/admin/medicines/delete/{id}(id=${med.medicineId})}"
+                          method="post">
+
+                        <button type="submit"
+                                class="btn-delete"
+                                onclick="return confirm('Delete this medicine?')">
+
+                            <i class="ti ti-trash"></i>
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

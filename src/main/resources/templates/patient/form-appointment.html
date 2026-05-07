@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt lịch khám</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #eef2f7, #f8fbff);
+            font-family: Arial, sans-serif;
+        }
+
+        .box {
+            max-width: 720px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        hr {
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h4>📅 Đặt lịch khám</h4>
+
+    <!-- ================= STEP 1 ================= -->
+    <div class="step-title">Bước 1: Chọn chuyên khoa</div>
+
+    <form method="get" action="/patient/appointments/new">
+
+        <div class="mb-3">
+            <label>Chuyên khoa</label>
+
+            <select name="specialtyId" class="form-select">
+                <option value="">-- Chọn chuyên khoa --</option>
+
+                <option th:each="s : ${specialties}"
+                        th:value="${s.specialtyId}"
+                        th:text="${s.name}"
+                        th:selected="${s.specialtyId == selectedSpecialtyId}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100">
+            Tiếp tục
+        </button>
+    </form>
+
+    <hr>
+
+    <!-- ================= STEP 2 ================= -->
+    <div class="step-title">Bước 2: Chọn bác sĩ</div>
+
+    <form method="get" action="/patient/appointments/new"
+          th:if="${selectedSpecialtyId != null}">
+
+        <input type="hidden" name="specialtyId" th:value="${selectedSpecialtyId}"/>
+
+        <div class="mb-3">
+            <label>Bác sĩ</label>
+
+            <select name="doctorId" class="form-select">
+                <option value="">-- Chọn bác sĩ --</option>
+
+                <option th:each="d : ${doctors}"
+                        th:value="${d.doctorId}"
+                        th:text="${d.user.profile.fullName}"
+                        th:selected="${d.doctorId == selectedDoctorId}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100">
+            Chọn bác sĩ
+        </button>
+    </form>
+
+    <hr>
+
+    <!-- ================= STEP 3 ================= -->
+    <div class="step-title">Bước 3: Chọn lịch khám</div>
+
+    <form th:if="${selectedDoctorId != null}"
+          th:action="@{/patient/appointments/save}"
+          method="post"
+          th:object="${dto}">
+
+        <input type="hidden" name="doctorId" th:value="${selectedDoctorId}"/>
+        <input type="hidden" name="specialtyId" th:value="${selectedSpecialtyId}"/>
+
+        <!-- DATE -->
+        <div class="mb-3">
+            <label>Ngày khám</label>
+
+            <input type="date"
+                   class="form-control"
+                   th:field="*{appointmentDate}">
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('appointmentDate')}"
+                 th:errors="*{appointmentDate}">
+            </div>
+        </div>
+
+        <!-- TIME -->
+        <div class="mb-3">
+            <label>Giờ khám</label>
+
+            <select class="form-select"
+                    th:field="*{appointmentTime}">
+
+                <option value="">-- Chọn giờ --</option>
+
+                <option th:each="t : ${slots}"
+                        th:value="${t}"
+                        th:text="${t}">
+                </option>
+            </select>
+
+            <div class="error"
+                 th:if="${#fields.hasErrors('appointmentTime')}"
+                 th:errors="*{appointmentTime}">
+            </div>
+        </div>
+
+        <!-- GLOBAL ERROR (VD: trùng lịch) -->
+        <div class="alert alert-danger"
+             th:if="${#fields.hasGlobalErrors()}">
+
+            <div th:each="e : ${#fields.globalErrors()}"
+                 th:text="${e}">
+            </div>
+
+        </div>
+
+        <button class="btn btn-success w-100 mt-3">
+            Đặt lịch
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
